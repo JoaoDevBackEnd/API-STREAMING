@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
 import { ApiRoutes } from "../../services/apiRoute";
 import APIService from "../../services/api";
 import { Badge, Button, Container, Table } from "react-bootstrap";
-import Actor from "../../models/actor";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -13,6 +11,11 @@ const ActorList = () => {
     useEffect(() => {
         loadData();
     }, []);
+
+    const formatDate = (createdAt) => {
+        const date = new Date(createdAt);
+        return date.toISOString().split('T')[0];
+    };
 
     const loadData = async () => {
         try {
@@ -26,8 +29,8 @@ const ActorList = () => {
     };
 
     const deleteActorClick = async (id) => {
-        var confirm = window.confirm('Deseja excluir este registro?');
-        if (confirm) {
+        var confirmDelete = window.confirm('Deseja excluir este registro?');
+        if (confirmDelete) {
             const apiService = new APIService();
             await apiService.deleteData(`${ApiRoutes.actor}/${id}`);
 
@@ -67,9 +70,8 @@ const ActorList = () => {
                                 <Badge bg="danger" pill onClick={() => deleteActorClick(ator.id)} >
                                     <MdDeleteOutline />
                                 </Badge>
-                                
                             </td>
-                            <td>{ator.createdAt}</td>
+                            <td>{formatDate(ator.createdAt)}</td>
                         </tr>
                     ))}
                 </tbody>
