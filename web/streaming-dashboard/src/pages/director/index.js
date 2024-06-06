@@ -62,7 +62,7 @@ const DirectorList = () => {
                             <td>{director.name}</td>
                             <td>{director.birthDate}</td>
                             <td className="text-center">
-                                <Link to={`/diretores/gerenciar${director.id}`}>
+                                <Link to={`/diretores/gerenciar/${director.id}`}>
                                     <Badge bg="primary" pill>
                                         <MdEdit />
                                     </Badge>

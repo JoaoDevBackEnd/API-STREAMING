@@ -11,7 +11,7 @@ const DirectorManage = () => {
     const isNew = !id;
     const message = isNew ? 'Novo' : 'Editar';
     const apiService = new APIService();
-    const [model, setModel] = useState({ name: '',profile: '',birthDate: ''});
+    const [model, setModel] = useState({ name: '',profile: ''});
 
     const navigate = useNavigate();
 

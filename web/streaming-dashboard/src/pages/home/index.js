@@ -7,7 +7,7 @@ const HomePage = () => {
 	return (
 		<Container>
 			<div>
-				<h1>Seja bem-vindo!</h1>
+				<h1>STREAMING API</h1>
 			</div>
 		</Container>
 	);
