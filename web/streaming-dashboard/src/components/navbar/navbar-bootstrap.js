@@ -17,6 +17,7 @@ export const NavbarBootstrap = () => {
                                 <NavDropdown.Item href="/generos">Gêneros</NavDropdown.Item>
                                 <NavDropdown.Item href="/diretores">Diretores</NavDropdown.Item>
                                 <NavDropdown.Item href="/atores">Atores</NavDropdown.Item>
+                                <NavDropdown.Item href="/works">Filmes</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">
                                     Separated link

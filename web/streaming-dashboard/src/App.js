@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CategoryList from './pages/category';
+import WorksList from './pages/Works';
 import GenderList from './pages/gender';
 import HomePage from './pages/home';
 import { NavbarBootstrap } from './components/navbar/navbar-bootstrap';
@@ -10,6 +11,7 @@ import CategoryManage from './pages/category/manage';
 import GenderManage from './pages/gender/manage';
 import ActorManage from './pages/actor/manage';
 import DirectorManage from './pages/director/manage';
+
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
             <Route path="/diretores" element={<DirectorList />} />
             <Route path="/diretores/gerenciar" element={<DirectorManage />} />
             <Route path="/diretores/gerenciar/:id" element={<DirectorManage />} />
+
+            <Route path="/works" element={<WorksList />} />
         </Routes>
     </Router>
 );
