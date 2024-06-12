@@ -1,28 +1,70 @@
-// Filename - pages/index.js
+import React, { useEffect, useState } from "react";
+import { Container, Button, Card } from "react-bootstrap";
+import { ApiRoutes } from "../../services/apiRoute";
+import APIService from "../../services/api";
 
-import React from "react";
-import { Container } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import lotrImage from '../../images/lotr_sociedadeAnel.jpg';
 const HomePage = () => {
-	return (
-		<Container>
-			<div>
-				<h1>STREAMING API</h1>
-			</div>
-			<Card style={{ width: '18rem' }}>
-				<Card.Img variant="top" src={lotrImage} />
-				<Card.Body>
-					<Card.Title>Card Title</Card.Title>
-					<Card.Text>
-						Some quick example text to build on the card title and make up the
-						bulk of the card's content.
-					</Card.Text>
-					<Button variant="primary">Go somewhere</Button>
-				</Card.Body>
-			</Card>
-		</Container>
-	);
+    const [works, setWorks] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        loadWorksData();
+        loadCategoriesData();
+    }, []);
+
+    const loadWorksData = async () => {
+        try {
+            const apiService = new APIService();
+            const data = await apiService.getData(ApiRoutes.works);
+            setWorks(data);
+        } catch (error) {
+            console.error('Erro ao carregar obras:', error);
+        }
+    };
+
+    const loadCategoriesData = async () => {
+        try {
+            const apiService = new APIService();
+            const data = await apiService.getData(ApiRoutes.category);
+            setCategories(data);
+        } catch (error) {
+            console.error('Erro ao carregar categorias:', error);
+        }
+    };
+
+    const getCategoryName = (categoryId) => {
+        const category = categories.find(cat => cat.id === categoryId);
+        return category ? category.name : 'Unknown';
+    };
+    const getImagePath = (id) => {
+        return `/images/${id}.jpg`;
+    };
+
+    const adventureMovies = works.filter(work => getCategoryName(work.categoryId) === 'Aventura');
+    //const suspenseMovies = works.filter(work => getCategoryName(work.categoryId) === 'Suspense');
+
+    return (
+        <Container>
+            <br />
+            <div>
+                <h1>FILMES DE AVENTURA</h1>
+            </div>
+            <div className="d-flex flex-wrap">
+                {adventureMovies.map(adventure => (
+                    <Card key={adventure.id} style={{ width: '18rem', margin: '1rem' }}>
+                        <Card.Img variant="top" src={getImagePath(adventure.id)}  />
+                        <Card.Body>
+                            <Card.Title>{adventure.title}</Card.Title>
+                            <Card.Text>
+                                {adventure.synopsis}
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                    </Card>
+                ))}
+            </div>
+           
+        </Container>
+    );
 };
 export default HomePage;
