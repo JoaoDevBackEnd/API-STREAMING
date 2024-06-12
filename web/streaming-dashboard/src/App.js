@@ -11,6 +11,7 @@ import CategoryManage from './pages/category/manage';
 import GenderManage from './pages/gender/manage';
 import ActorManage from './pages/actor/manage';
 import DirectorManage from './pages/director/manage';
+import WorksManager from './pages/Works/manager';
 
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
             <Route path="/diretores/gerenciar/:id" element={<DirectorManage />} />
 
             <Route path="/works" element={<WorksList />} />
+            <Route path="/works/gerenciar" element={<WorksManager />} />
+            <Route path="/works/gerenciar/:id" element={<WorksManager />} />
         </Routes>
     </Router>
 );

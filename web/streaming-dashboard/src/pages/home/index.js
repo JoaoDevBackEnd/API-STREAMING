@@ -5,11 +5,11 @@ import APIService from "../../services/api";
 
 const HomePage = () => {
     const [works, setWorks] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const [Genders, setGenders] = useState([]);
 
     useEffect(() => {
         loadWorksData();
-        loadCategoriesData();
+        loadGendersData();
     }, []);
 
     const loadWorksData = async () => {
@@ -21,33 +21,31 @@ const HomePage = () => {
             console.error('Erro ao carregar obras:', error);
         }
     };
-
-    const loadCategoriesData = async () => {
+    const loadGendersData = async () => {
         try {
             const apiService = new APIService();
-            const data = await apiService.getData(ApiRoutes.category);
-            setCategories(data);
+            const data = await apiService.getData(ApiRoutes.gender);
+            setGenders(data);
         } catch (error) {
             console.error('Erro ao carregar categorias:', error);
         }
     };
-
-    const getCategoryName = (categoryId) => {
-        const category = categories.find(cat => cat.id === categoryId);
-        return category ? category.name : 'Unknown';
-    };
+    const getNameGenderId= (genderId) =>{
+        const gender=Genders.find(gender =>gender.id ===genderId);
+        return gender.name;
+    }
     const getImagePath = (id) => {
         return `/images/${id}.jpg`;
     };
 
-    const adventureMovies = works.filter(work => getCategoryName(work.categoryId) === 'Aventura');
+    const adventureMovies = works.filter(work => getNameGenderId(work.genderId) === 'Fantasia');
     //const suspenseMovies = works.filter(work => getCategoryName(work.categoryId) === 'Suspense');
 
     return (
         <Container>
             <br />
             <div>
-                <h1>FILMES DE AVENTURA</h1>
+                <h1>FILMES DE FANTASIA</h1>
             </div>
             <div className="d-flex flex-wrap">
                 {adventureMovies.map(adventure => (
@@ -63,7 +61,6 @@ const HomePage = () => {
                     </Card>
                 ))}
             </div>
-           
         </Container>
     );
 };

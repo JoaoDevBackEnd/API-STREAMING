@@ -8,10 +8,12 @@ import { Link } from "react-router-dom";
 const WorksList = () => {
     const [Works, setWorks] = useState([]);
     const [Category, setCategories] = useState([]);
+    const [Genders, setGender] = useState([]);
 
     useEffect(() => {
         loadData();
         loadCategories();
+        loadGenders();
     }, []);
 
     const formatDate = (createdAt) => {
@@ -20,7 +22,11 @@ const WorksList = () => {
     };
     const getNameCategoryId =(categoryId) =>{
         const category = Category.find(cat => cat.id === categoryId);
-        return category.name;
+        return category ? category.name : 'Categoria não encontrada';
+    }
+    const getNameGenderId= (genderId) =>{
+        const gender=Genders.find(gender =>gender.id ===genderId);
+        return gender ? gender.name : 'Gênero não encontrado';
     }
     const loadData = async () => {
         try {
@@ -41,6 +47,15 @@ const WorksList = () => {
             console.error('Erro ao carregar categorias:', error);
         }
     };
+    const loadGenders =async() =>{
+        try{
+            const apiService = new APIService();
+            const data=await apiService.getData(ApiRoutes.gender);
+            setGender(data);
+        }catch (error) {
+            console.error('Erro ao carregar categorias:', error);
+        }
+    }
     const deleteActorClick = async (id) => {
         var confirm = window.confirm('Deseja excluir este registro?');
         if (confirm) {
@@ -54,7 +69,7 @@ const WorksList = () => {
         <Container>
             <div className="d-flex justify-content-between align-items-center mt-4 mb-4">
                 <h3>SÉRIES E FILMES CADASTRADOS</h3>
-                <Link to={`/generos/gerenciar`}>
+                <Link to={`/works/gerenciar`}>
                     <Button color="primary">Novo</Button>
                 </Link>
             </div>
@@ -74,10 +89,10 @@ const WorksList = () => {
                         <tr key={works.id}>
                             <td className="text-right">{works.id}</td>
                             <td className="text-right">{works.title}</td>
-                            <td className="text-right">{works.genderId}</td>
+                            <td className="text-right">{getNameGenderId(works.genderId)}</td>
                             <td>{getNameCategoryId(works.categoryId)}</td>
                             <td className="text-center">
-                                <Link to={`/generos/gerenciar/${works.id}`}>
+                                <Link to={`/works/gerenciar/${works.id}`}>
                                     <Badge bg="primary" pill>
                                         <MdEdit />
                                     </Badge>
