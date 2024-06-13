@@ -89,8 +89,8 @@ const WorksList = () => {
                         <tr key={works.id}>
                             <td className="text-right">{works.id}</td>
                             <td className="text-right">{works.title}</td>
-                            <td className="text-right">{getNameGenderId(works.genderId)}</td>
-                            <td>{getNameCategoryId(works.categoryId)}</td>
+                            <td className="text-right">{works.gender}</td>
+                            <td>{works.category}</td>
                             <td className="text-center">
                                 <Link to={`/works/gerenciar/${works.id}`}>
                                     <Badge bg="primary" pill>

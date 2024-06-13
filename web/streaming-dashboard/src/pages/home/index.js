@@ -32,17 +32,16 @@ const HomePage = () => {
     };
     const getNameGenderId= (genderId) =>{
         const gender=Genders.find(gender =>gender.id ===genderId);
-        return gender.name;
+        return gender?.name;
     }
     const getImagePath = (id) => {
         return `/images/${id}.jpg`;
     };
-
-    const adventureMovies = works.filter(work => getNameGenderId(work.genderId) === 'Fantasia');
-    //const suspenseMovies = works.filter(work => getCategoryName(work.categoryId) === 'Suspense');
+     const adventureMovies = works.filter(work =>getNameGenderId(work.genderId) === 'Fantasia');
+     const HorrorMovies = works.filter(work =>(work.genderId) === 'Horror');
 
     return (
-        <Container>
+        <Container>   
             <br />
             <div>
                 <h1>FILMES DE FANTASIA</h1>
@@ -56,7 +55,26 @@ const HomePage = () => {
                             <Card.Text>
                                 {adventure.synopsis}
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button variant="primary">ASSISTA JÁ</Button>
+                        </Card.Body>
+                    </Card>
+                ))}
+            </div>
+
+            <br />
+            <div>
+                <h1>FILMES DE HORROR</h1>
+            </div>
+            <div className="d-flex flex-wrap">
+                {HorrorMovies.map(HorrorMovies => (
+                    <Card key={HorrorMovies.id} style={{ width: '18rem', margin: '1rem' }}>
+                        <Card.Img variant="top" src={getImagePath(HorrorMovies.id)}  />
+                        <Card.Body>
+                            <Card.Title>{HorrorMovies.title}</Card.Title>
+                            <Card.Text>
+                                {HorrorMovies.synopsis}
+                            </Card.Text>
+                            <Button variant="primary">ASSISTA JÁ</Button>
                         </Card.Body>
                     </Card>
                 ))}

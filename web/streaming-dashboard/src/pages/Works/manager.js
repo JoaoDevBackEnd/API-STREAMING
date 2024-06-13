@@ -11,12 +11,11 @@ const WorksManager = () => {
     const isNew = !id;
     const message = isNew ? 'Novo' : 'Editar';
     const apiService = new APIService();
-    const [model, setModel] = useState({ title: '', synopsis: '', genderId: '', categoryId: '', directorId: '',actors: ''});
+    const [model, setModel] = useState({ title: '', synopsis: '', genderId: '', categoryId: '', directorId: ''});
     const navigate = useNavigate();
     const [Category, setCategories] = useState([]);
     const [Genders, setGender] = useState([]);
     const [Director, setDirector] = useState([]);
-    const [Actor, setActor] = useState([]);
     useEffect(() => {
         if (!isNew) {
             const loadData = async () => {
@@ -158,7 +157,7 @@ const WorksManager = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formActors">
+                {/* <Form.Group className="mb-3" controlId="formActors">
                     <Form.Label>Actors</Form.Label>
                     <Form.Select
                         name="actors"
@@ -172,7 +171,7 @@ const WorksManager = () => {
                             </option>
                         ))}
                     </Form.Select>
-                </Form.Group>
+                </Form.Group>  */}
                 <Form.Group className="mb-3" controlId="formDirector">
                     <Form.Label>DIRETOR</Form.Label>
                     <Form.Select
@@ -199,5 +198,4 @@ const WorksManager = () => {
         </Container>
     );
 };
-
 export default WorksManager;
