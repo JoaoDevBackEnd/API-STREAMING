@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CategoryList from './pages/category';
+import RelatorioList from './pages/relatorios';
 import WorksList from './pages/Works';
 import GenderList from './pages/gender';
 import HomePage from './pages/home';
@@ -12,6 +13,7 @@ import GenderManage from './pages/gender/manage';
 import ActorManage from './pages/actor/manage';
 import DirectorManage from './pages/director/manage';
 import WorksManager from './pages/Works/manager';
+
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
             <Route path="/works" element={<WorksList />} />
             <Route path="/works/gerenciar" element={<WorksManager />} />
             <Route path="/works/gerenciar/:id" element={<WorksManager />} />
+
+            <Route path="/relatorios" element={<RelatorioList />} />
         </Routes>
     </Router>
 );

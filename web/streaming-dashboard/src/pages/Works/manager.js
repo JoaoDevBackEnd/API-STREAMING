@@ -29,20 +29,12 @@ const WorksManager = () => {
             };
             loadData();
         }
-        loadActors();
         loadGenders();
         loadCategories();
         loadDirector();
     }, []);
 
-    const loadActors = async () => {
-        try {
-            const data = await apiService.getData(ApiRoutes.actor);
-            setActor(data);
-        } catch (error) {
-            console.error('Erro ao carregar categorias:', error);
-        }
-    };
+    
 
     const loadCategories = async () => {
         try {

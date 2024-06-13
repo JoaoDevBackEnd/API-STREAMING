@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Card } from "react-bootstrap";
+import { Container, Button, Card, Carousel } from "react-bootstrap";
 import { ApiRoutes } from "../../services/apiRoute";
 import APIService from "../../services/api";
 
@@ -21,6 +21,7 @@ const HomePage = () => {
             console.error('Erro ao carregar obras:', error);
         }
     };
+
     const loadGendersData = async () => {
         try {
             const apiService = new APIService();
@@ -30,56 +31,75 @@ const HomePage = () => {
             console.error('Erro ao carregar categorias:', error);
         }
     };
+
     const getNameGenderId= (genderId) =>{
         const gender=Genders.find(gender =>gender.id ===genderId);
         return gender?.name;
-    }
+    };
+
     const getImagePath = (id) => {
         return `/images/${id}.jpg`;
     };
-     const adventureMovies = works.filter(work =>getNameGenderId(work.genderId) === 'Fantasia');
-     const HorrorMovies = works.filter(work =>(work.genderId) === 'Horror');
 
     return (
-        <Container>   
+        <Container style={{ backgroundColor: "#000000"}}>
             <br />
             <div>
                 <h1>FILMES DE FANTASIA</h1>
             </div>
-            <div className="d-flex flex-wrap">
-                {adventureMovies.map(adventure => (
-                    <Card key={adventure.id} style={{ width: '18rem', margin: '1rem' }}>
-                        <Card.Img variant="top" src={getImagePath(adventure.id)}  />
-                        <Card.Body>
-                            <Card.Title>{adventure.title}</Card.Title>
-                            <Card.Text>
-                                {adventure.synopsis}
-                            </Card.Text>
-                            <Button variant="primary">ASSISTA JÁ</Button>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
+            <Carousel>
+                {works.map(movie => {
+                    if (getNameGenderId(movie.genderId) === 'Fantasia') {
+                        return (
+                            <Carousel.Item key={movie.id}>
+                                <div className="d-flex justify-content-around">
+                                    <Card style={{ width: '18rem', margin: '1rem' }}>
+                                        <Card.Img variant="top" src={getImagePath(movie.id)}  />
+                                        <Card.Body>
+                                            <Card.Title>{movie.title}</Card.Title>
+                                            <Card.Text>
+                                                {movie.synopsis}
+                                            </Card.Text>
+                                            <Button variant="primary">ASSISTA JÁ</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            </Carousel.Item>
+                        );
+                    }
+                    return null;
+                })}
+            </Carousel>
 
             <br />
             <div>
                 <h1>FILMES DE HORROR</h1>
             </div>
-            <div className="d-flex flex-wrap">
-                {HorrorMovies.map(HorrorMovies => (
-                    <Card key={HorrorMovies.id} style={{ width: '18rem', margin: '1rem' }}>
-                        <Card.Img variant="top" src={getImagePath(HorrorMovies.id)}  />
-                        <Card.Body>
-                            <Card.Title>{HorrorMovies.title}</Card.Title>
-                            <Card.Text>
-                                {HorrorMovies.synopsis}
-                            </Card.Text>
-                            <Button variant="primary">ASSISTA JÁ</Button>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
+            <Carousel>
+                {works.map(movie => {
+                    if (getNameGenderId(movie.genderId) === 'Horror') {
+                        return (
+                            <Carousel.Item key={movie.id}>
+                                <div className="d-flex justify-content-around">
+                                    <Card style={{ width: '18rem', margin: '1rem' }}>
+                                        <Card.Img variant="top" src={getImagePath(movie.id)}  />
+                                        <Card.Body>
+                                            <Card.Title>{movie.title}</Card.Title>
+                                            <Card.Text>
+                                                {movie.synopsis}
+                                            </Card.Text>
+                                            <Button variant="primary">ASSISTA JÁ</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            </Carousel.Item>
+                        );
+                    }
+                    return null;
+                })}
+            </Carousel>
         </Container>
     );
 };
+
 export default HomePage;
