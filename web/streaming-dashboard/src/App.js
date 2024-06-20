@@ -13,7 +13,8 @@ import GenderManage from './pages/gender/manage';
 import ActorManage from './pages/actor/manage';
 import DirectorManage from './pages/director/manage';
 import WorksManager from './pages/Works/manager';
-
+import UsersList from'./pages/users';
+import UsersManage from './pages/users/manager';
 
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
             <Route path="/works/gerenciar" element={<WorksManager />} />
             <Route path="/works/gerenciar/:id" element={<WorksManager />} />
 
+            <Route path="/users" element={<UsersList />} />           
+            <Route path="/users/gerenciar" element={<UsersManage />} />
+            <Route path="/users/gerenciar/:id" element={<UsersManage />} />
+ 
             <Route path="/relatorios" element={<RelatorioList />} />
         </Routes>
     </Router>

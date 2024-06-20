@@ -3,6 +3,7 @@ export const ApiRoutes = {
     category: 'category',
     director: 'director',
     gender:'gender',
-    works:'works'
+    works:'works',
+    users:'account'
     // CategoriasGerenciar: '/category/gerenciar'
 };
